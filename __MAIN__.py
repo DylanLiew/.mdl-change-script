@@ -13,7 +13,6 @@ dict_find = {}
 
 
 
-
 ####    this step aims to read the whole txt document ###
 print('Reading file {}...'.format(TXT_file_path))
 with open(TXT_file_path,"r") as file:
@@ -21,7 +20,7 @@ with open(TXT_file_path,"r") as file:
     # print(words)
 #############################################################
 
-print('Transfering')
+
 
 ####    this step aims to split all characters then store them into the list    ###
 list_txt = words.split()
@@ -57,7 +56,9 @@ with open(mdl_path,"r") as file:
             with open (write_path, "a") as z:#firstly we need to write "+", because when we deal with this line, we must delete "+", then in the output stage, the output of "+" will be missing
                 z.write("+")
             line_diffplus = line[1:]#dismiss "+"
+            line_diffplus = line_diffplus.replace('=',' = ')
             list = line_diffplus.split()
+            print(list)
             for i, value in enumerate(list):
                 if list[i] == "=":
                     reg1 = list[i-1]
@@ -66,6 +67,7 @@ with open(mdl_path,"r") as file:
                     # print(reg2)
                     if reg2 == None:#it is normal that some parameters will be missing
                         reg2 = list [i+1]
+                        # print(list[i+1])
                     with open(write_path, "a") as z:
                         z.write(reg1 + " = " + reg2 + "\t\t")
             with open(write_path, "a") as z:
@@ -80,5 +82,3 @@ with open(mdl_path,"r") as file:
         else:
             with open(write_path,"a") as z:
                 z.write(line)
-
-print('FINISH')
